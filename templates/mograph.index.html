@@ -2,9 +2,13 @@
 <!-- reelkit motion-graphics film skeleton. Copy to <film>/index.html and author your timeline.
      The renderer (render_mograph.js) drives the four globals at the bottom. Keep full-bleed. -->
 <html><head><meta charset="utf-8"><style>
+  /* safe area: keep ALL text inside these insets — platform UI covers the edges */
+  :root{ --safe-top:10%; --safe-bottom:18%; --safe-x:6%; --accent:#e01010 }
   html,body{margin:0;width:1080px;height:1920px;background:#0a0a0a;overflow:hidden;
     font-family:'Helvetica Neue',Arial,sans-serif;color:#fff}
   #stage{position:absolute;inset:0}
+  /* HOOK: put the biggest element on frame 1 (t=0), no slow fade-in.
+     ENDCARD: last ~1.5s = brand lock (logo + tagline + CTA) — pair with a STING in the audio cues. */
   .line{position:absolute;left:0;right:0;text-align:center;font-weight:800;
     font-size:120px;letter-spacing:-2px;opacity:0;will-change:transform,opacity}
   #l1{top:34%} #l2{top:46%} #l3{top:58%}

@@ -26,7 +26,8 @@ const SRCFPS = FPS*SS;
     const t = i / SRCFPS;
     await page.evaluate((t)=>window.__seek(t), t);
     await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-    await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.png'), clip:{x:0,y:0,width:W,height:H} });
+    // JPEG q92 instead of PNG: ~2.7x faster to encode at this size, invisible after grade+grain.
+    await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.jpg'), type:'jpeg', quality:92, clip:{x:0,y:0,width:W,height:H} });
     if (i%60===0 && i){ const el=(Date.now()-t0)/1000;
       console.log(`  ${i}/${total}  ${(el/i).toFixed(2)}s/frame  eta ${Math.round((total-i)*el/i)}s`); }
   }

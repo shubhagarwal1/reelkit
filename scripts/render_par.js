@@ -46,7 +46,7 @@ async function makePage(browser){
       const t = i / SRCFPS;
       await page.evaluate((t)=>window.__seek(t), t);
       await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-      await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.png'), clip:{x:0,y:0,width:W,height:H} });
+      await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.jpg'), type:'jpeg', quality:92, clip:{x:0,y:0,width:W,height:H} });
       if ((++done) % 120 === 0) console.log(`  ${done}/${total}`);
     }
     await page.close();

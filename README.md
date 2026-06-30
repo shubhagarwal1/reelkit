@@ -65,16 +65,23 @@ node   scripts/build_audio.js  film/index.html film/audio.wav                 # 
 skills/
   reel-liveaction/     SKILL.md — footage pipeline playbook Claude follows
   reel-mograph/        SKILL.md — motion-graphics playbook
+  cinematography/      SKILL.md — lighting / angle / lens / mood vocabulary (shapes generation, selection, grade)
 scripts/
   analyze_ref.py       reference → recipe.json (tempo, beat grid, cut grid) + vocal/instrumental stems
-  build_edit.py        editmap.json → graded, beat-cut reel with text composited BEHIND the subject
-  render_mograph.js    deterministic frame renderer (steps GSAP per frame + motion-blur supersampling)
+  build_edit.py        editmap.json → graded (mood presets), beat-cut reel, text composited BEHIND the subject
+  render_mograph.js    deterministic frame renderer (steps GSAP per frame + motion-blur supersampling, JPEG)
   render_par.js        same renderer, frames split across N pages (RAM-aware) → N× faster per film
-  build_audio.js       turns timeline cues into a pitched/panned SFX track from an SFX manifest
-templates/             editmap schema + worked example, GSAP HTML skeleton, build & batch scripts, brief
+  build_audio.js       SFX track from a manifest, + optional music bed & endcard sting (MUSIC=/STING=)
+  score_shots.py       rank clips/images by exposure + sharpness + face framing; keep the best takes
+  captions.py          transcribe + burn sound-off captions inside the bottom safe area
+templates/             editmap schema + example, GSAP skeleton, build & batch scripts, brief, brandkit.json
 recipes/               saved reference analyses — reused, never re-measured
 LESSONS.md             append-only fixes — the plugin's memory (read before every run)
 ```
+
+Every reel/film also runs a **quality checklist** baked into the skills — cinematic lighting (via
+generation prompts + shot scoring), mood grade presets, a strong hook, safe margins for platform UI,
+sound-off captions, a brand-locked endcard + CTA, and a music bed. See each SKILL.md.
 
 ## Performance & stats
 

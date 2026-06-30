@@ -18,12 +18,26 @@ RED = M.get('RED', '#E01010')
 SERIF = M.get('serif', '/System/Library/Fonts/Times.ttc')
 SANS  = M.get('sans',  '/System/Library/Fonts/Supplemental/Arial Bold.ttf')
 WORK = os.path.join(DIR, 'work_edit'); os.makedirs(WORK, exist_ok=True)
-# Editable color grade. editmap["grade"] overrides this whole filter string if present.
-GRADE = M.get('grade',
+# Mood grade presets (LUT-like). editmap picks one via "grade_preset"; "grade" overrides
+# the whole filter string outright. All raise the black floor a touch so nothing reads muddy.
+# Match these to the cinematography skill's mood->recipe table.
+TAIL = "vignette=PI/4.2,gblur=sigma=0.4,noise=alls=7:allf=t,format=yuv420p"
+GRADE_PRESETS = {
+ "warm-golden": ("format=gbrp,curves=r='0/0.06 0.5/0.57 1/1':g='0/0.05 0.5/0.5 1/0.97':"
+                 "b='0/0.08 0.5/0.44 1/0.88',eq=contrast=1.08:saturation=0.92:gamma=1.02:gamma_r=1.05,"+TAIL),
+ "moody-teal":  ("format=gbrp,curves=r='0/0.04 0.5/0.5 1/0.96':g='0/0.06 0.5/0.51 1/0.97':"
+                 "b='0/0.12 0.5/0.55 1/1',eq=contrast=1.16:saturation=0.7:gamma=0.94,"+TAIL),
+ "clean":       ("eq=contrast=1.05:saturation=1.04:brightness=0.02:gamma=1.0,"
+                 "vignette=PI/5,noise=alls=4:allf=t,format=yuv420p"),
+ "vintage":     ("format=gbrp,curves=r='0/0.08 0.25/0.27 0.5/0.55 1/0.97':g='0/0.05 1/0.94':"
+                 "b='0/0.1 0.5/0.45 1/0.86',eq=contrast=1.06:saturation=0.72:gamma=0.96,"+TAIL),
+ "noir":        ("hue=s=0,curves=all='0/0.04 0.5/0.5 1/0.98',eq=contrast=1.22:gamma=0.92,"+TAIL),
+}
+# Resolution order: explicit "grade" string > named "grade_preset" > vintage default.
+GRADE = M.get('grade') or GRADE_PRESETS.get(M.get('grade_preset'),
          "format=gbrp,curves=r='0/0.05 0.25/0.27 0.5/0.55 0.75/0.81 1/0.99'"
          ":g='0/0.03 0.5/0.49 1/0.96':b='0/0.07 0.5/0.45 1/0.89',"
-         "eq=contrast=1.10:saturation=0.76:gamma=0.95:gamma_r=1.03:gamma_b=0.96,"
-         "vignette=PI/4.0,gblur=sigma=0.4,noise=alls=8:allf=t,format=yuv420p")
+         "eq=contrast=1.10:saturation=0.76:gamma=0.95:gamma_r=1.03:gamma_b=0.96,"+TAIL)
 ZEND = {'slowpush': 1.08, 'push': 1.16, 'hold': 1.0}
 
 def ff(args):

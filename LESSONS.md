@@ -36,6 +36,16 @@ here. Both skills tell Claude to read this before starting. Newest at the bottom
 - **Wait for readiness.** Renderer must wait for `window.__ready`, `document.fonts.ready`, and image
   decode, then 2× rAF after each `__seek`, or frames capture mid-layout.
 - **Supersample for motion blur.** Render at fps×2, blend with `tmix=frames=2` → real motion blur.
+- **The screenshot is ~86% of render time** (measured: 1446ms PNG vs 32ms seek + 164ms rAF per frame @1080×1920). **Write JPEG q92, not PNG** → ~2.7× faster (535ms), invisible after grade+grain. 720×1280 is another ~2×. This is the #1 speed lever.
+
+## Quality / craft
+- **Lighting & angle are capture-time, not post.** You can't relight flat footage — specify it in the
+  generation prompt (cinematography skill). Score takes with `score_shots.py`; keep the best-lit/framed.
+- **Lift the black floor in every grade** — raw output read muddy/underexposed on some films. Mood
+  presets in build_edit.py and the mograph grade both raise blacks.
+- **Made-for-social basics matter as much as the visuals:** hook on frame 1, keep text inside the
+  safe area (platform UI covers edges), burn sound-off captions, end on a brand lock + CTA + sting,
+  and put a music bed under SFX-only mograph (biggest perceived-quality lift).
 
 ## Environment
 - macOS has no `timeout` command by default — don't wrap commands in it.

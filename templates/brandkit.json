@@ -1,0 +1,32 @@
+{
+  "_note": "Per-company brand system. Load alongside the brief so every reel shares one look. Referenced by both pipelines for color, type, logo, safe-areas, CTA, and mood.",
+  "company": "Acme Studios",
+  "palette": {
+    "accent": "#E01010",
+    "bg": "#0A0A0A",
+    "fg": "#FFFFFF",
+    "muted": "#9A9A9A"
+  },
+  "type": {
+    "display_serif": "/System/Library/Fonts/Times.ttc",
+    "ui_sans": "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    "pairing_note": "one serif for big words, one bold sans for captions — do not mix more"
+  },
+  "logo": { "white": "assets/logo-white.png", "mark": "assets/logo-mark.png" },
+  "mood": "luxury wedding",
+  "grade_preset": "warm-golden",
+
+  "safe_area": {
+    "_note": "keep all text inside these insets — platform UI covers the edges",
+    "top": 0.10, "bottom": 0.18, "left": 0.06, "right": 0.12
+  },
+  "hook": { "_note": "first ~1.5s: biggest word/number/image on frame 1, no slow fade-in", "seconds": 1.5 },
+  "captions": { "enabled": true, "_note": "burn for sound-off viewing; keep inside safe_area.bottom" },
+  "endcard": {
+    "logo": true,
+    "tagline": "the photographer's platform",
+    "cta": "link in bio",
+    "sting": true,
+    "_note": "every video ends on the brand lock + CTA + a short audio sting"
+  }
+}

@@ -62,6 +62,21 @@ text-behind + front, concats all segments, and muxes `editmap.audio`.
 images and confirm: text sits behind the subject, words land on the beat, end card survives to
 the end, grade is consistent. Fix and re-render if not.
 
+## Quality checklist — apply to EVERY reel
+
+Load `skills/cinematography` and `templates/brandkit.json` first. Then:
+- **Lighting & angle (capture-time):** when generating footage, write prompts in DP language —
+  `[subject] · [lighting] · [angle+lens] · [movement] · [mood]` (see the cinematography skill).
+  You can't relight flat footage in post; specify it at generation.
+- **Shot selection:** generate a few takes, score with `python3 scripts/score_shots.py <dir> --top N`
+  (exposure + sharpness + face framing), keep the best, drop the rest.
+- **Grade by mood:** set `"grade_preset"` in the editmap — `warm-golden | moody-teal | clean | vintage | noir`
+  (maps to the cinematography mood table; all lift the black floor so nothing reads muddy).
+- **Hook / safe margins / endcard+CTA:** biggest beat on frame 1; keep text in `brandkit.safe_area`;
+  end on the brand lock + CTA + the ad-lib/sting.
+- **Sound-off captions:** burn with `scripts/captions.py` for muted viewing.
+- **Shot variety:** vary scale (wide→medium→ECU) and angle; don't repeat one framing.
+
 ## Requirements
 `ffmpeg`, Python 3 with `cv2 numpy rembg demucs librosa faster-whisper soundfile`.
 rembg on macOS: force CPU — `os.environ['ONNXRUNTIME_EXECUTION_PROVIDERS']='CPUExecutionProvider'`

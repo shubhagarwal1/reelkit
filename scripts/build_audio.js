@@ -155,6 +155,25 @@ function panFor(type, n){
     labels.push(`[s${i}]`);
   });
 
+  // Optional music bed + endcard sting (env MUSIC / STING, or argv[4] / argv[5]).
+  // The bed loops under the SFX as a present-but-subordinate layer; the sting is a one-shot
+  // brand stab dropped ~1.5s before the end (over the endcard).
+  const MUSIC = process.argv[4] || process.env.MUSIC;
+  const STING = process.argv[5] || process.env.STING;
+  if (MUSIC) {
+    const mi = inputs.length; inputs.push(path.resolve(MUSIC));
+    parts.push(`[${mi}:a]aresample=48000,aloop=loop=-1:size=2e9,atrim=0:${duration},` +
+               `loudnorm=I=-18:TP=-3:LRA=8,afade=t=in:st=0:d=0.5,` +
+               `afade=t=out:st=${(duration-1.4).toFixed(2)}:d=1.4,volume=0.6[music]`);
+    labels.push('[music]');
+  }
+  if (STING) {
+    const si = inputs.length; inputs.push(path.resolve(STING));
+    const at = Math.max(0, Math.round((duration - 1.5) * 1000));
+    parts.push(`[${si}:a]aresample=48000,adelay=${at}|${at},volume=0.9[sting]`);
+    labels.push('[sting]');
+  }
+
   parts.push(`${labels.join('')}amix=inputs=${labels.length}:normalize=0:duration=longest,` +
              `volume=0.92,alimiter=level=disabled:limit=0.97,apad,atrim=0:${duration},` +
              `aformat=sample_fmts=s16:channel_layouts=stereo[out]`);

@@ -64,6 +64,18 @@ ffmpeg -y -i <film>/silent.mp4 -i <film>/audio.wav -c:v copy -c:a aac -b:a 192k 
 Adapt `templates/render_all.sh`: loop films, kill stray Chromium between each, wipe `frames/`
 after each to free disk, recompress anything >60 MB, copy finals to the delivery folder, retry once.
 
+## Quality checklist — apply to EVERY film
+
+Load `skills/cinematography` for the look and `templates/brandkit.json` for the brand system. Then:
+- **Hook (first ~1.5s):** biggest word/number/image on frame 1 — no slow fade-in. Social videos win in the first second.
+- **Safe margins:** keep all text inside `brandkit.safe_area` (top 10% / bottom 18% / sides) — platform UI covers the edges.
+- **Sound-off captions:** most viewers are muted → burn captions with `scripts/captions.py` (sits in the bottom safe area).
+- **Endcard + CTA:** end on the brand lock — logo + tagline + CTA ("link in bio") + an audio **sting**.
+- **Music bed:** SFX-only feels thin. Pass `MUSIC=bed.mp3 STING=sting.wav` to the build → a beat-matched bed under the SFX + a closing stab. (Biggest perceived-quality lift.)
+- **Exposure floor:** the build grade lifts blacks so nothing reads muddy/underexposed.
+- **Typography & motion:** one type pairing, strong size/weight hierarchy; physics easing + stagger + parallax depth (not flat moves).
+- **Brand consistency:** same palette/type/logo across all films so they read as one campaign.
+
 ## Why it looks expensive
 - **Deterministic stepping** (`__seek` per frame), not screen-recording → frame-perfect, machine-independent.
 - **Supersample + tmix** → genuine motion blur you can't fake in a single render.
