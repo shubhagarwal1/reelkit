@@ -39,6 +39,10 @@ Render a couple of frames or a low-ss pass and READ them. Fix layout/timing in t
 node ${CLAUDE_PLUGIN_ROOT}/scripts/render_mograph.js <film>/index.html <film>/frames 1080 1920 30 2
 ```
 Renders at fps×ss; ffmpeg later blends every `ss` frames (`tmix`) into real motion blur.
+**Faster:** use `render_par.js <...> <workers>` to split frames across N pages (~N× speedup; the
+default worker count is RAM-aware). Both print a `STATS` line (frames, elapsed, s/frame) when done.
+See the README "Parallel rendering" section for the per-RAM concurrency budget and running multiple
+films across sessions/machines (each film is independent — split via the `FILMS` env in render_all.sh).
 
 **4. Build the sound-design track** (no music bed — pure SFX from a CC0 manifest):
 ```

@@ -55,6 +55,7 @@ scripts/
   analyze_ref.py       reference → recipe.json (tempo, beat grid, cut grid) + vocal/instrumental stems
   build_edit.py        editmap.json → graded, beat-cut reel with text composited BEHIND the subject
   render_mograph.js    deterministic frame renderer (steps GSAP per frame + motion-blur supersampling)
+  render_par.js        same renderer, frames split across N pages (RAM-aware) → N× faster per film
   build_audio.js       turns timeline cues into a pitched/panned SFX track from an SFX manifest
 templates/             editmap schema + worked example, GSAP HTML skeleton, build & batch scripts, brief
 recipes/               saved reference analyses — reused, never re-measured
@@ -84,6 +85,62 @@ batch of 9 films ran serially (one Chromium at a time, the 8 GB limit) in ~3 h.
 whisper <1 min, librosa seconds. Person matting is ~30 s total via the one-matte-per-shot trick
 (per-frame rembg would be ~35 min — see LESSONS.md). The ffmpeg composite of ~780 frames is a few
 minutes. Whole reel end-to-end: well under 10 min once stems are cached.
+
+## Optimize the time
+
+Ranked by impact (all knobs on the `render_*` command or in the brief):
+
+1. **Parallelize one film** — use `render_par.js` instead of `render_mograph.js`. It splits the frames
+   across N headless pages in one browser → roughly **N× faster**. Biggest single win.
+2. **Drop supersample** `ss 2 → 1` — halves frames, removes motion blur. Use for drafts/social cuts.
+3. **Render smaller** — 720×1280 instead of 1080×1920 → screenshots ~2.25× smaller/faster.
+4. **Lower fps** 30 → 24 — 20% fewer frames.
+5. **Faster ffmpeg preset** — `-preset fast` for drafts, `slow` only for the final master.
+6. **Cache** — reuse `recipes/*.json` and audio stems; never re-analyze the same reference.
+7. **Frames to JPEG** — faster disk writes than PNG for long films (slight quality trade-off).
+
+## Parallel rendering — more videos in the same time
+
+There are **two independent axes**. Combine them.
+
+### A. Within one film — split frames across workers
+```bash
+node scripts/render_par.js film/index.html film/frames 1080 1920 30 2 <workers>
+```
+N pages each claim frames from a shared queue. `<workers>` defaults RAM-aware (see table). One 22s
+film that took ~18 min serially drops to a few minutes at 4–6 workers.
+
+### B. Across films — many videos at once
+Each film is **fully independent** (its own `index.html`, `frames/`, `audio.wav`, output) — zero shared
+state — so you can fan them out. Two ways:
+
+- **One machine, multiple processes:** launch several films in the background, but keep *total*
+  concurrent pages within the RAM budget (a parallel film at 4 workers ≈ 4 pages).
+- **Multiple Claude Code sessions / machines:** split the film list per session. `render_all.sh` already
+  takes a `FILMS` env var, so:
+  ```bash
+  FILMS="10 11 12" bash render_all.sh   # session / machine 1
+  FILMS="13 14 15" bash render_all.sh   # session / machine 2  (independent dirs, no conflict)
+  ```
+  Share the plugin + briefs via git; each session renders its slice and drops finals in the same folder.
+
+### How much RAM — concurrency budget
+
+The gating resource is RAM, **not** CPU. Each concurrent headless page at 1080×1920 needs ~1–1.2 GB;
+leave ~2 GB headroom for the OS, node, and the ffmpeg pass. Also cap at `cores − 1`. So:
+
+`concurrent pages ≈ min(cores − 1, (RAM_GB − 2) / 1.2)`
+
+| RAM | Safe concurrent pages (1080×1920) | Notes |
+|---|---|---|
+| 8 GB | 2–3 | our build machine — we rendered films **serially**; use ~2 workers per film |
+| 16 GB | 6–8 | one film fully parallel, or 2 films at moderate workers |
+| 32 GB | ~16 (CPU-bound) | several films at once comfortably |
+| 64 GB+ | core-limited | dozens of pages; throughput capped by CPU, not memory |
+
+At **720×1280** each page is ~half the RAM, so roughly double these. For **live-action**, demucs is the
+RAM spike (~2–4 GB while separating) — run one analysis at a time, then the ffmpeg composite is light.
+`render_par.js` picks a RAM-aware worker default automatically and prints what it chose.
 
 ## How it gets smarter
 No training — it **accumulates**. Each analyzed reference is saved to `recipes/` and reused.
