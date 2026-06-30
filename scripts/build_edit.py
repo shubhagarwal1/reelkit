@@ -4,9 +4,10 @@
 # Usage: python3 build_edit.py <editmap.json>
 #   - asset paths in the editmap resolve relative to the editmap's own folder
 #   - output = editmap["output"] (rel to that folder), default "reel.mp4"
-import json, os, subprocess, math, shutil, sys
+import json, os, subprocess, math, shutil, sys, time
 import cv2, numpy as np
 from rembg import remove, new_session
+T0 = time.time()
 
 EDITMAP = os.path.abspath(sys.argv[1]) if len(sys.argv) > 1 else os.path.join(os.getcwd(), 'editmap.json')
 DIR = os.path.dirname(EDITMAP)
@@ -140,3 +141,8 @@ ff(['-i', silent, '-i', os.path.join(DIR, M['audio']),
     '-c:v','libx264','-crf','23','-preset','medium','-pix_fmt','yuv420p',
     '-c:a','aac','-b:a','192k','-shortest', final])
 print('DONE ->', final)
+el = time.time() - T0
+nfr = int(round(M['duration'] * FPS))
+mb = os.path.getsize(final) / 1048576
+print(f"STATS  segments={len(M['segments'])}  frames={nfr}  res={W}x{H}@{FPS}  "
+      f"dur={M['duration']}s  size={mb:.1f}MB  elapsed={int(el//60)}m{int(el%60)}s")

@@ -21,13 +21,17 @@ const SRCFPS = FPS*SS;
   const duration = await page.evaluate('window.__duration');
   const total = Math.ceil(duration * SRCFPS);
   console.log(`render ${W}x${H} dur=${duration}s out=${FPS}fps ss=${SS} (src ${SRCFPS}fps) frames=${total}`);
+  const t0 = Date.now();
   for (let i=0;i<total;i++){
     const t = i / SRCFPS;
     await page.evaluate((t)=>window.__seek(t), t);
     await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
     await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.png'), clip:{x:0,y:0,width:W,height:H} });
-    if (i%60===0) console.log(`  ${i}/${total}`);
+    if (i%60===0 && i){ const el=(Date.now()-t0)/1000;
+      console.log(`  ${i}/${total}  ${(el/i).toFixed(2)}s/frame  eta ${Math.round((total-i)*el/i)}s`); }
   }
   await browser.close();
-  console.log('FRAMES_DONE '+total);
+  const el = (Date.now()-t0)/1000;
+  console.log(`FRAMES_DONE ${total}`);
+  console.log(`STATS  frames=${total}  res=${W}x${H}  ss=${SS}  elapsed=${Math.floor(el/60)}m${Math.round(el%60)}s  rate=${(el/total).toFixed(2)}s/frame`);
 })();

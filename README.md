@@ -61,6 +61,30 @@ recipes/               saved reference analyses — reused, never re-measured
 LESSONS.md             append-only fixes — the plugin's memory (read before every run)
 ```
 
+## Performance & stats
+
+Both scripts print a `STATS` line on completion (frames, resolution, size, elapsed, s/frame), so
+every run is self-documenting. Render time is **dominated by frame count** — it scales linearly.
+
+**Motion-graphics** (the cost is screenshotting each frame in headless Chromium). Real numbers from a
+9-film batch at **1080×1920, 30fps, supersample 2** (= 60 src frames/sec) on an **8 GB M-series Mac**:
+
+| Film length | Frames rendered | Render time | s/frame | Output size |
+|---|---|---|---|---|
+| 16 s | 960 | 15–24 min | 0.9–1.5 | 12 MB |
+| 18 s | 1080 | 12–25 min | 0.7–1.4 | 17–39 MB |
+| 22 s | 1320 | 14–19 min | 0.6–0.9 | 23–31 MB |
+| 30 s | 1800 | ~18 min | ~0.6 | 54 MB |
+
+Rule of thumb: **render ≈ frames × 0.6–1.6 s** (heavier animation = slower/frame) + ~1–2 min for the
+ffmpeg grade/mux. Cut time by halving `ss` to 1 (no motion blur) or rendering at 720×1280. A full
+batch of 9 films ran serially (one Chromium at a time, the 8 GB limit) in ~3 h.
+
+**Live-action** (a 26 s / 720×1280 reel): audio forensics dominates up front — demucs ~1–3 min,
+whisper <1 min, librosa seconds. Person matting is ~30 s total via the one-matte-per-shot trick
+(per-frame rembg would be ~35 min — see LESSONS.md). The ffmpeg composite of ~780 frames is a few
+minutes. Whole reel end-to-end: well under 10 min once stems are cached.
+
 ## How it gets smarter
 No training — it **accumulates**. Each analyzed reference is saved to `recipes/` and reused.
 Every bug fixed gets one line in `LESSONS.md`, which both skills read first — so the same mistake
