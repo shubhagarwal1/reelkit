@@ -14,6 +14,20 @@ Claude auto-picks **reel-liveaction** when the brief has footage, **reel-mograph
 
 ---
 
+## ▶ See it in action
+
+Three of the motion-graphics films this pipeline produced (click a thumbnail to play). Each was
+rendered from a GSAP timeline — no footage, no manual editing.
+
+| Living Invitations | Face Search | Live Dashboard |
+|:---:|:---:|:---:|
+| [<img src="examples/living-invitations.png" width="240">](examples/living-invitations.mp4) | [<img src="examples/face-search.png" width="240">](examples/face-search.mp4) | [<img src="examples/live-dashboard.png" width="240">](examples/live-dashboard.mp4) |
+| cinematic + RSVP UI card | "just your face" photo-grid reveal | live metrics + charts |
+
+> Web-compressed previews (540×960, ~1 MB each). The pipeline outputs full 1080×1920.
+
+---
+
 ## Install
 
 ```bash
