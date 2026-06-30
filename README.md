@@ -162,6 +162,34 @@ one `STATS` line back. So the wall-clock/RAM cost is real; the token cost there 
 A typical film is **~tens of thousands of tokens** (cents to ~a dollar of model usage) against 15–30 min
 of free local render. Budget for **machine time and RAM**, not tokens.
 
+### Real cost ledger (this project, 8 GB Mac)
+
+**Measured** = from render logs (render time, RAM, frames, output size). **Estimated** = token/$ figures —
+token use was *not* metered per video, so these are engineering estimates at **Opus 4.8 pricing
+($5 / $25 per 1M in/out)**; verify your own with the [token-counting API]. A 1080×1920 review frame ≈
+`1080×1920/750 ≈ 2.7K` vision tokens.
+
+| Film (1080×1920, ss2) | Frames | Render time (measured) | Peak RAM | Output | Est. tokens to author+review | Est. model cost |
+|---|---|---|---|---|---|---|
+| Anthem (30s) | 1800 | 17m37s | ~2 GB | 54 MB | ~50K (8K out + ~5 frames) | ~$0.40 |
+| Living Invitations (22s) | 1320 | 18m45s | ~2 GB | 31 MB | ~45K | ~$0.35 |
+| Scale (18s) | 1080 | 11m52s | ~2 GB | 17 MB | ~35K | ~$0.25 |
+| Platform (16s) | 960 | 14m50s | ~2 GB | 12 MB | ~30K | ~$0.20 |
+| **9-film batch (total)** | **~11,160** | **~3h12m wall (serial)** | ~2 GB at a time | ~260 MB | **~400K** | **~$3** |
+
+**Live-action reel** (26s / 720×1280): demucs+whisper+matte+composite ≈ <10 min compute; authoring the
+editmap + audio mix + a review grid ≈ ~60–90K tokens (more iteration than a mograph film) ≈ **~$0.50**.
+
+**The compute side costs almost nothing in money** — it ran on a local 8 GB Mac, so the bill is
+electricity (single-digit cents for a ~3 h batch), not cloud. Rent the equivalent on a cloud VM and
+~3 h of one mid-tier instance is roughly **$1–3**. Either way the dominant *resource* is wall-clock
+time and the 8 GB RAM ceiling (which forced serial rendering), **not** tokens or dollars.
+
+**Bottom line for ~10 finished films:** on the order of **$3–5 of model usage** + **~3–4 h of machine
+time**. Halving `ss` or dropping to 720×1280 roughly halves the render time at no token cost.
+
+[token-counting API]: https://platform.claude.com/docs/en/build-with-claude/token-counting
+
 **Keep tokens low:**
 - **Review a montage grid (one image), not N separate frames** — biggest lever.
 - **Reuse `recipes/`** — skip re-reasoning over a known reference.
