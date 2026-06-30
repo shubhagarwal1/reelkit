@@ -142,6 +142,32 @@ At **720×1280** each page is ~half the RAM, so roughly double these. For **live
 RAM spike (~2–4 GB while separating) — run one analysis at a time, then the ffmpeg composite is light.
 `render_par.js` picks a RAM-aware worker default automatically and prints what it chose.
 
+## Cost model — tokens vs compute
+
+These are **two separate bills, and the heavy one is not tokens.**
+
+**The render is free of tokens.** Frame rendering, demucs, whisper, rembg, ffmpeg are all *local
+CPU/RAM* (the 15–30 min per film). Claude doesn't watch the render — it kicks off a script and reads
+one `STATS` line back. So the wall-clock/RAM cost is real; the token cost there is zero.
+
+**Tokens are spent only when Claude authors or judges:**
+
+| Step | Token cost |
+|---|---|
+| Read brief + SKILL.md | tiny, cached across the session |
+| Write the editmap / GSAP `index.html` | main *output* cost — one file, ~3–8K output tokens |
+| Review rendered frames (vision) | the real driver — each image read ≈ 1–2K tokens |
+| Fix-and-retry loops | adds up only if it iterates a lot |
+
+A typical film is **~tens of thousands of tokens** (cents to ~a dollar of model usage) against 15–30 min
+of free local render. Budget for **machine time and RAM**, not tokens.
+
+**Keep tokens low:**
+- **Review a montage grid (one image), not N separate frames** — biggest lever.
+- **Reuse `recipes/`** — skip re-reasoning over a known reference.
+- **Don't paste full render logs** — the scripts print a compact `STATS` line for that.
+- **Author once, render many** — re-rendering or changing params costs *no* new tokens; only edits do.
+
 ## How it gets smarter
 No training — it **accumulates**. Each analyzed reference is saved to `recipes/` and reused.
 Every bug fixed gets one line in `LESSONS.md`, which both skills read first — so the same mistake
