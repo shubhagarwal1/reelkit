@@ -1,0 +1,235 @@
+{
+  "_note": "WORKED EXAMPLE. Asset paths are relative to THIS file. Snap segment start/end to recipe.cut_grid; time words[].a/b to speech; behind=true puts big words behind the subject.",
+  "width": 720,
+  "height": 1280,
+  "fps": 30,
+  "duration": 26.0,
+  "audio": "mixed_audio.wav",
+  "RED": "#E01010",
+  "segments": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 3.714,
+      "type": "video",
+      "file": "clips/c6_talk1.mp4",
+      "in": 1.95,
+      "behind": true,
+      "capwords": [
+        {
+          "t": "THIS IS",
+          "a": 0.13,
+          "b": 1.41
+        },
+        {
+          "t": "A MESSAGE",
+          "a": 1.41,
+          "b": 2.23
+        },
+        {
+          "t": "TO EVERY",
+          "a": 2.23,
+          "b": 2.67
+        },
+        {
+          "t": "WEDDING",
+          "a": 2.67,
+          "b": 2.97
+        },
+        {
+          "t": "PHOTOGRAPHER",
+          "a": 2.97,
+          "b": 3.62
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "start": 3.714,
+      "end": 5.571,
+      "type": "image",
+      "file": "stills_chin.png",
+      "move": "push"
+    },
+    {
+      "id": 3,
+      "start": 5.571,
+      "end": 7.893,
+      "type": "video",
+      "file": "clips/c7_talk2.mp4",
+      "in": 1.4,
+      "behind": true,
+      "words": [
+        {
+          "t": "SUCCESS",
+          "a": 5.73,
+          "b": 6.6
+        },
+        {
+          "t": "NOT THE BEST",
+          "a": 6.7,
+          "b": 7.89
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "start": 7.893,
+      "end": 8.821,
+      "type": "image",
+      "file": "stills_profile.png",
+      "move": "push"
+    },
+    {
+      "id": 5,
+      "start": 8.821,
+      "end": 13.0,
+      "type": "video",
+      "file": "clips/c7_talk2.mp4",
+      "in": 4.65,
+      "behind": true,
+      "words": [
+        {
+          "t": "BE BETTER",
+          "a": 8.85,
+          "b": 10.29
+        },
+        {
+          "t": "THAN YESTERDAY",
+          "a": 11.03,
+          "b": 12.57
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "start": 13.0,
+      "end": 14.857,
+      "type": "video",
+      "file": "clips/c3_cash.mp4",
+      "in": 2.0,
+      "behind": false,
+      "words": [
+        {
+          "t": "DELIVERED",
+          "a": 13.05,
+          "b": 14.8
+        }
+      ],
+      "footer": {
+        "t": "the whole gallery \u2014 before the cake is cut",
+        "a": 13.4,
+        "b": 14.8
+      }
+    },
+    {
+      "id": 7,
+      "start": 14.857,
+      "end": 16.714,
+      "type": "image",
+      "file": "stills_face.png",
+      "move": "push",
+      "behind": true,
+      "words": [
+        {
+          "t": "FACE SEARCH",
+          "a": 14.9,
+          "b": 16.66
+        }
+      ],
+      "footer": {
+        "t": "guests find every photo with one selfie",
+        "a": 14.95,
+        "b": 16.66
+      }
+    },
+    {
+      "id": 8,
+      "start": 16.714,
+      "end": 18.571,
+      "type": "image",
+      "file": "stills_couch_side.png",
+      "move": "slowpush",
+      "behind": true,
+      "words": [
+        {
+          "t": "ALBUM STUDIO",
+          "a": 16.76,
+          "b": 18.52
+        }
+      ],
+      "footer": {
+        "t": "albums that design themselves",
+        "a": 16.8,
+        "b": 18.52
+      }
+    },
+    {
+      "id": 9,
+      "start": 18.571,
+      "end": 20.429,
+      "type": "image",
+      "file": "stills_profile.png",
+      "move": "push",
+      "behind": true,
+      "words": [
+        {
+          "t": "IN THE CLOUD",
+          "a": 18.62,
+          "b": 20.38
+        }
+      ],
+      "footer": {
+        "t": "camera2cloud \u2014 it uploads while you shoot",
+        "a": 18.66,
+        "b": 20.38
+      }
+    },
+    {
+      "id": 10,
+      "start": 20.429,
+      "end": 22.286,
+      "type": "video",
+      "file": "clips/c2_fullbody.mp4",
+      "in": 0.8,
+      "behind": true,
+      "words": [
+        {
+          "t": "THE BRAND",
+          "a": 20.48,
+          "b": 22.24
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "start": 22.286,
+      "end": 24.143,
+      "type": "video",
+      "file": "clips/c2_fullbody.mp4",
+      "in": 2.6,
+      "behind": true,
+      "words": [
+        {
+          "t": "ANUPAM",
+          "a": 22.34,
+          "b": 24.1
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "start": 24.143,
+      "end": 26.0,
+      "type": "video",
+      "file": "clips/c2_fullbody.mp4",
+      "in": 4.4,
+      "behind": true,
+      "title": {
+        "top": "SAMARO",
+        "bottom": "DEBUT"
+      }
+    }
+  ],
+  "output": "reel.mp4"
+}

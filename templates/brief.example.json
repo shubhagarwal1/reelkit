@@ -1,0 +1,33 @@
+{
+  "_note": "Per-company brief. This is the ONLY thing that changes between projects. Hand it to Claude with 'build a reel from this brief' and it picks the right skill (reel-liveaction if footage present, reel-mograph otherwise).",
+  "company": "Acme Studios",
+  "brand_color": "#E01010",
+  "aspect": "720x1280",
+  "fps": 30,
+  "target_duration_sec": 26,
+
+  "mode": "liveaction",
+  "reference_video": "refs/reference-music-video.mp4",
+  "footage_dir": "assets/clips",
+  "photos_dir": "assets/photos",
+  "talking_head_clips": ["assets/clips/speaker1.mp4", "assets/clips/speaker2.mp4"],
+
+  "script": [
+    "THIS IS A MESSAGE",
+    "SUCCESS / NOT THE BEST",
+    "BE BETTER / THAN YESTERDAY"
+  ],
+  "feature_callouts": [
+    { "word": "FACE SEARCH", "footer": "find every photo with one selfie" },
+    { "word": "ALBUM STUDIO", "footer": "albums that design themselves" }
+  ],
+  "end_card": { "top": "ACME", "bottom": "DEBUT" },
+  "output_name": "Acme-Debut.mp4",
+
+  "_mograph_alt": {
+    "mode": "mograph",
+    "films": [
+      { "name": "Acme-Anthem", "lines": ["EVERY MOMENT", "EVERY FACE", "ONE PLATFORM"] }
+    ]
+  }
+}

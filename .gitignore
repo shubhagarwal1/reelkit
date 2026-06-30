@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+node_modules/
+*/frames/
+*/work_edit/
+*/sep/
+*.log
+.DS_Store

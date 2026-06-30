@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "reelkit editmap (live-action)",
+  "type": "object",
+  "required": ["width", "height", "fps", "duration", "audio", "segments"],
+  "properties": {
+    "width": { "type": "integer", "default": 720 },
+    "height": { "type": "integer", "default": 1280 },
+    "fps": { "type": "integer", "default": 30 },
+    "duration": { "type": "number", "description": "total seconds; MUST equal the audio length" },
+    "audio": { "type": "string", "description": "mixed audio file, relative to this editmap" },
+    "output": { "type": "string", "default": "reel.mp4" },
+    "RED": { "type": "string", "description": "brand accent hex, e.g. #E01010" },
+    "serif": { "type": "string", "description": "optional font path override (big words)" },
+    "sans": { "type": "string", "description": "optional font path override (captions)" },
+    "grade": { "type": "string", "description": "optional ffmpeg grade filter override" },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "start", "end", "type", "file"],
+        "properties": {
+          "id": { "type": "integer" },
+          "start": { "type": "number", "description": "snap to recipe.cut_grid downbeat" },
+          "end": { "type": "number", "description": "snap to recipe.cut_grid downbeat" },
+          "type": { "enum": ["video", "image"] },
+          "file": { "type": "string", "description": "clip/image path, relative to this editmap" },
+          "in": { "type": "number", "description": "video only: trim start inside the source" },
+          "move": { "enum": ["push", "slowpush", "hold"], "description": "image only: Ken-Burns" },
+          "behind": { "type": "boolean", "description": "composite big words BEHIND the subject" },
+          "words": {
+            "type": "array",
+            "description": "big kinetic words (top); each timed to speech",
+            "items": { "type": "object", "required": ["t", "a", "b"],
+              "properties": { "t": {"type":"string"}, "a": {"type":"number"}, "b": {"type":"number"} } }
+          },
+          "capwords": {
+            "type": "array",
+            "description": "lower-third caption build (front); one phrase per beat",
+            "items": { "type": "object", "required": ["t", "a", "b"],
+              "properties": { "t": {"type":"string"}, "a": {"type":"number"}, "b": {"type":"number"} } }
+          },
+          "footer": {
+            "type": "object",
+            "description": "small white subtitle (front)",
+            "properties": { "t": {"type":"string"}, "a": {"type":"number"}, "b": {"type":"number"} }
+          },
+          "title": {
+            "type": "object",
+            "description": "two-word end card (top + bottom), composited behind",
+            "properties": { "top": {"type":"string"}, "bottom": {"type":"string"} }
+          }
+        }
+      }
+    }
+  }
+}

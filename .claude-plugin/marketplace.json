@@ -1,0 +1,15 @@
+{
+  "name": "reelkit-marketplace",
+  "owner": { "name": "Samaro", "url": "https://samaro.ai" },
+  "metadata": {
+    "description": "AI video-generation pipelines packaged as Claude Code plugins.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "reelkit",
+      "source": "./",
+      "description": "Live-action promo-reel editor + motion-graphics film renderer. See README for setup."
+    }
+  ]
+}

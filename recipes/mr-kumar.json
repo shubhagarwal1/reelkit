@@ -1,0 +1,16 @@
+{
+  "_note": "Seed recipe — reference music video used for the Samaro debut reel. Reuse instead of re-analyzing. Regenerate with scripts/analyze_ref.py to refresh beat_times/voice.",
+  "reference": "Mr Kumar (reference music video)",
+  "rhythm": {
+    "tempo_bpm": 129.2,
+    "beat_sec": 0.464,
+    "bar_sec": 1.857,
+    "duration_sec": 26.26,
+    "cut_grid": [0.0, 1.857, 3.714, 5.571, 7.429, 9.286, 11.143, 13.0, 14.857, 16.714, 18.571, 20.429, 22.286, 24.143, 26.0]
+  },
+  "structure": [
+    { "from": 0.0,  "to": 11.0, "feel": "voice-forward verse — music punches between lines" },
+    { "from": 11.5, "to": 19.0, "feel": "music-forward chorus — big text, full loudness" },
+    { "from": 19.5, "to": 26.0, "feel": "spoken outro + ad-lib bursts (aha-hah) over the brand lock" }
+  ]
+}

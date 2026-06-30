@@ -1,0 +1,7 @@
+{
+  "name": "reelkit",
+  "version": "0.1.0",
+  "description": "Two AI video pipelines for Claude Code: a live-action promo-reel editor (demucs/whisper/rembg + ffmpeg compositing) and a code-driven motion-graphics film renderer (GSAP + headless Chromium + ffmpeg). Drive both from a short per-brand brief.",
+  "author": { "name": "Samaro", "url": "https://samaro.ai" },
+  "keywords": ["video", "ffmpeg", "motion-graphics", "gsap", "demucs", "whisper", "rembg", "reel"]
+}
