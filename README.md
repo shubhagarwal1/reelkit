@@ -16,8 +16,15 @@ Claude auto-picks **reel-liveaction** when the brief has footage, **reel-mograph
 
 ## ▶ See it in action
 
-Three of the motion-graphics films this pipeline produced (click a thumbnail to play). Each was
-rendered from a GSAP timeline — no footage, no manual editing.
+Films this pipeline produced (click a thumbnail to play) — each rendered from a GSAP timeline, no
+footage, no manual editing.
+
+**"Don't Blink"** — written, rendered, scored, and graded end-to-end by Claude through this plugin in
+**66 seconds** on an 8 GB Mac (780 frames @ 1080×1920, kinetic type + a counter racing to 200,000,000 + dense sound design):
+
+| [<img src="examples/dont-blink.png" width="260">](examples/dont-blink.mp4) |
+|:---:|
+| DON'T BLINK → 200M memories → SAMARO · built by Claude, one prompt |
 
 | Living Invitations | Face Search | Live Dashboard |
 |:---:|:---:|:---:|

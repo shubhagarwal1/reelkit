@@ -35,7 +35,7 @@
 
     // ---- renderer contract (do not rename) ----
     window.__duration = tl.duration();            // total seconds
-    window.__seek = (t) => { tl.pause(); tl.seek(t); };   // jump to exact time
+    window.__seek = (t) => { tl.pause(); tl.seek(t, false); };  // false = fire callbacks so onUpdate-driven values (counters) render per-frame
     window.__audio = [                            // sound-design cues -> sfx/manifest.json types
       { type: 'whoosh', t: 0.0 },
       { type: 'thunk',  t: 2 * BEAT },

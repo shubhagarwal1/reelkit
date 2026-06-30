@@ -36,6 +36,7 @@ here. Both skills tell Claude to read this before starting. Newest at the bottom
 - **Wait for readiness.** Renderer must wait for `window.__ready`, `document.fonts.ready`, and image
   decode, then 2× rAF after each `__seek`, or frames capture mid-layout.
 - **Supersample for motion blur.** Render at fps×2, blend with `tmix=frames=2` → real motion blur.
+- **`window.__seek` must call `tl.seek(t, false)`.** GSAP's `seek()` SUPPRESSES callbacks by default, so any `onUpdate`-driven value (animated counters, dynamic text) silently freezes at its initial value across every rendered frame. Pass `false` (don't-suppress) so callbacks fire per-frame. Property tweens render fine either way — only callback-driven animation breaks, so it's easy to miss until you watch the output.
 - **The screenshot is ~86% of render time** (measured: 1446ms PNG vs 32ms seek + 164ms rAF per frame @1080×1920). **Write JPEG q92, not PNG** → ~2.7× faster (535ms), invisible after grade+grain. 720×1280 is another ~2×. This is the #1 speed lever.
 
 ## Quality / craft

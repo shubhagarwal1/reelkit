@@ -1,0 +1,10 @@
+=== DON'T BLINK — instrumented build (1080x1920 ss2 workers3) ===
+render            21.89s  peakRAM   266MB
+audio              1.79s  peakRAM   163MB
+grade             41.26s  peakRAM   742MB
+mux                0.47s  peakRAM    32MB
+--------------------------------------------
+frames rendered : 780 (JPEG,  52M on disk)
+output          : 13.000000s  1080x1920  8.5MB
+TOTAL wall time : 66s (1.1 min)
+render share    : see render line above (dominant)
