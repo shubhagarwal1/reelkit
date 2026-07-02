@@ -20,22 +20,22 @@ single biggest quality lever we've measured).
 
 ## ▶ See it in action
 
-Films this pipeline produced (click a thumbnail to play) — each rendered from a GSAP timeline, no
-footage, no manual editing.
+Films this pipeline produced — every one rendered from a GSAP timeline, no footage, no manual
+editing. **Click a thumbnail to play** (web previews 540×960, ~1 MB; the pipeline outputs full 1080×1920).
 
-**"Don't Blink"** — written, rendered, scored, and graded end-to-end by Claude through this plugin in
-**66 seconds** on an 8 GB Mac (780 frames @ 1080×1920, kinetic type + a counter racing to 200,000,000 + dense sound design):
+**v0.2 campaign** — four beat-locked use-case reels, written + built + rendered in one session:
 
-| [<img src="examples/dont-blink.png" width="260">](examples/dont-blink.mp4) |
-|:---:|
-| DON'T BLINK → 200M memories → SAMARO · built by Claude, one prompt |
+| [<img src="examples/fest-mode.png" width="110">](examples/fest-mode.mp4) | [<img src="examples/same-night.png" width="110">](examples/same-night.mp4) | [<img src="examples/monday-9am.png" width="110">](examples/monday-9am.mp4) | [<img src="examples/bib-4127.png" width="110">](examples/bib-4127.mp4) |
+|:---:|:---:|:---:|:---:|
+| Fest Mode | Same Night | Monday 9AM | Bib 4127 |
 
-| Living Invitations | Face Search | Live Dashboard |
-|:---:|:---:|:---:|
-| [<img src="examples/living-invitations.png" width="240">](examples/living-invitations.mp4) | [<img src="examples/face-search.png" width="240">](examples/face-search.mp4) | [<img src="examples/live-dashboard.png" width="240">](examples/live-dashboard.mp4) |
-| cinematic + RSVP UI card | "just your face" photo-grid reveal | live metrics + charts |
+**v0.1 films:**
 
-> Web-compressed previews (540×960, ~1 MB each). The pipeline outputs full 1080×1920.
+| [<img src="examples/dont-blink.png" width="110">](examples/dont-blink.mp4) | [<img src="examples/living-invitations.png" width="110">](examples/living-invitations.mp4) | [<img src="examples/face-search.png" width="110">](examples/face-search.mp4) | [<img src="examples/live-dashboard.png" width="110">](examples/live-dashboard.mp4) |
+|:---:|:---:|:---:|:---:|
+| Don't Blink¹ | Living Invitations | Face Search | Live Dashboard |
+
+¹ built end-to-end by Claude in **66 s** on an 8 GB Mac — 780 frames @ 1080×1920, a counter racing to 200,000,000, dense sound design.
 
 ---
 
