@@ -116,7 +116,12 @@ scripts/
   shot.js              preview tool: screenshot a film at N timestamps + report page errors (the iterate-cheap loop)
   extract_beats.py     tempo/beat grid + energetic-start bed cutting → beats.json (music-first workflow)
   harvest_assets.py    Wikimedia Commons + Openverse harvester (≥1600px, biggest-first, license manifest)
+  gen_sfx.sh           synthesize a deterministic, license-clean SFX kit with ffmpeg alone (no downloads)
 templates/             editmap schema + example, GSAP skeleton, build & batch scripts (incl. build_fast.sh env-knob build), brief, brandkit.json
+  kinetic.rig.html     a real shipped 30.9s reel — working code for the whole motion vocabulary (the base rig)
+  BRIEF.example.md     the shared campaign system brief (brand + motion + sound + pacing rules)
+  SCRIPT.example.md    a full bar-addressed production script (32s reel, every cue timed + gained)
+  sfx.manifest.example.json  the sound-family manifest shape build_audio.js resolves cues through
 recipes/               saved reference analyses — reused, never re-measured
 LESSONS.md             append-only fixes — the plugin's memory (read before every run)
 ```

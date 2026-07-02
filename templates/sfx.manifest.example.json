@@ -1,0 +1,313 @@
+{
+  "_note": "Hybrid kit: GENUINE CC0 UI/foley mp3s (sfx/genuine/*) + DETERMINISTIC procedural one-shots (sfx/synth/*, made by sfx/gen_sfx_v2.sh, license-clean). No music bed. Existing keys (type/whoosh/buzz/tile/shutter/ding/pop/impact/riser/count/ambient) are PRESERVED and now augmented with synth variations so a reel can fire dozens of the same type without an audible repeat. New keys add finer-grained UI/transition textures; see docs/research/sound-upgrade.md.",
+  "type": [
+    "sfx/genuine/type/type_0_194799.mp3",
+    "sfx/genuine/type/type_1_180997.mp3",
+    "sfx/genuine/type/type_2_194798.mp3",
+    "sfx/genuine/type/type_3_348239.mp3",
+    "sfx/genuine/type/type_4_194795.mp3",
+    "sfx/genuine/type/type_5_194797.mp3",
+    "sfx/synth/key/key_0.wav",
+    "sfx/synth/key/key_1.wav",
+    "sfx/synth/key/key_2.wav",
+    "sfx/synth/key/key_3.wav",
+    "sfx/synth/key/key_4.wav",
+    "sfx/synth/key/key_5.wav",
+    "sfx/synth/key/key_6.wav",
+    "sfx/synth/key/key_7.wav"
+  ],
+  "whoosh": [
+    "sfx/genuine/whoosh/whoosh_0_60013.mp3",
+    "sfx/genuine/whoosh/whoosh_1_60009.mp3",
+    "sfx/genuine/whoosh/whoosh_2_60030.mp3",
+    "sfx/genuine/whoosh/whoosh_3_683096.mp3",
+    "sfx/genuine/whoosh/whoosh_4_59992.mp3",
+    "sfx/genuine/whoosh/whoosh_5_60007.mp3",
+    "sfx/synth/transition_whoosh/transition_whoosh_0.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_1.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_2.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_3.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_4.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_5.wav"
+  ],
+  "buzz": [
+    "sfx/genuine/buzz/buzz_0_320181.mp3",
+    "sfx/genuine/buzz/buzz_1_220191.mp3",
+    "sfx/genuine/buzz/buzz_2_220184.mp3",
+    "sfx/genuine/buzz/buzz_3_396193.mp3",
+    "sfx/genuine/buzz/buzz_4_657948.mp3",
+    "sfx/genuine/buzz/buzz_5_658266.mp3",
+    "sfx/synth/digital/digital_0.wav",
+    "sfx/synth/digital/digital_1.wav",
+    "sfx/synth/digital/digital_2.wav",
+    "sfx/synth/digital/digital_3.wav",
+    "sfx/synth/digital/digital_4.wav",
+    "sfx/synth/digital/digital_5.wav",
+    "sfx/synth/digital/digital_6.wav",
+    "sfx/synth/digital/digital_7.wav"
+  ],
+  "tile": [
+    "sfx/genuine/tile/tile_0_320181.mp3",
+    "sfx/genuine/tile/tile_1_447910.mp3",
+    "sfx/genuine/tile/tile_2_220184.mp3",
+    "sfx/genuine/tile/tile_3_253168.mp3",
+    "sfx/genuine/tile/tile_4_220206.mp3",
+    "sfx/genuine/tile/tile_5_200469.mp3",
+    "sfx/genuine/tile/tile_6_657948.mp3",
+    "sfx/genuine/tile/tile_7_467951.mp3",
+    "sfx/synth/click/click_0.wav",
+    "sfx/synth/click/click_1.wav",
+    "sfx/synth/click/click_2.wav",
+    "sfx/synth/click/click_3.wav",
+    "sfx/synth/click/click_4.wav",
+    "sfx/synth/click/click_5.wav",
+    "sfx/synth/click/click_6.wav",
+    "sfx/synth/click/click_7.wav"
+  ],
+  "shutter": [
+    "sfx/genuine/shutter/shutter_0_431588.mp3",
+    "sfx/genuine/shutter/shutter_1_170229.mp3",
+    "sfx/genuine/shutter/shutter_2_61059.mp3",
+    "sfx/synth/camera_focus/camera_focus_0.wav",
+    "sfx/synth/camera_focus/camera_focus_1.wav",
+    "sfx/synth/camera_focus/camera_focus_2.wav",
+    "sfx/synth/camera_focus/camera_focus_3.wav",
+    "sfx/synth/camera_focus/camera_focus_4.wav",
+    "sfx/synth/camera_focus/camera_focus_5.wav"
+  ],
+  "ding": [
+    "sfx/genuine/ding/ding_0_243701.mp3",
+    "sfx/genuine/ding/ding_1_456161.mp3",
+    "sfx/genuine/ding/ding_2_376807.mp3",
+    "sfx/genuine/ding/ding_3_360948.mp3",
+    "sfx/genuine/ding/ding_4_376745.mp3",
+    "sfx/synth/chime/chime_0.wav",
+    "sfx/synth/chime/chime_1.wav",
+    "sfx/synth/chime/chime_2.wav",
+    "sfx/synth/chime/chime_3.wav",
+    "sfx/synth/chime/chime_4.wav",
+    "sfx/synth/chime/chime_5.wav",
+    "sfx/synth/chime/chime_6.wav",
+    "sfx/synth/chime/chime_7.wav"
+  ],
+  "pop": [
+    "sfx/genuine/pop/pop_0_202230.mp3",
+    "sfx/genuine/pop/pop_1_245645.mp3",
+    "sfx/genuine/pop/pop_2_245646.mp3",
+    "sfx/genuine/pop/pop_3_266915.mp3",
+    "sfx/genuine/pop/pop_4_244654.mp3",
+    "sfx/synth/pop/pop_0.wav",
+    "sfx/synth/pop/pop_1.wav",
+    "sfx/synth/pop/pop_2.wav",
+    "sfx/synth/pop/pop_3.wav",
+    "sfx/synth/pop/pop_4.wav",
+    "sfx/synth/pop/pop_5.wav",
+    "sfx/synth/pop/pop_6.wav",
+    "sfx/synth/pop/pop_7.wav"
+  ],
+  "impact": [
+    "sfx/genuine/impact/impact_0_504626.mp3",
+    "sfx/genuine/impact/impact_1_205938.mp3",
+    "sfx/genuine/impact/impact_2_325269.mp3",
+    "sfx/genuine/impact/impact_3_82027.mp3",
+    "sfx/genuine/impact/impact_4_268500.mp3",
+    "sfx/synth/noise_hit/noise_hit_0.wav",
+    "sfx/synth/noise_hit/noise_hit_1.wav",
+    "sfx/synth/noise_hit/noise_hit_2.wav",
+    "sfx/synth/noise_hit/noise_hit_3.wav",
+    "sfx/synth/thunk/thunk_0.wav",
+    "sfx/synth/thunk/thunk_1.wav",
+    "sfx/synth/thunk/thunk_2.wav",
+    "sfx/synth/thunk/thunk_3.wav"
+  ],
+  "riser": [
+    "sfx/genuine/riser/riser_0_523088.mp3",
+    "sfx/genuine/riser/riser_1_561207.mp3",
+    "sfx/genuine/riser/riser_2_176046.mp3",
+    "sfx/genuine/riser/riser_3_522095.mp3",
+    "sfx/synth/riser_short/riser_short_0.wav",
+    "sfx/synth/riser_short/riser_short_1.wav",
+    "sfx/synth/riser_short/riser_short_2.wav",
+    "sfx/synth/riser_short/riser_short_3.wav",
+    "sfx/synth/riser_long/riser_long_0.wav",
+    "sfx/synth/riser_long/riser_long_1.wav",
+    "sfx/synth/riser_long/riser_long_2.wav",
+    "sfx/synth/riser_long/riser_long_3.wav"
+  ],
+  "count": [
+    "sfx/genuine/tile/tile_3_253168.mp3",
+    "sfx/genuine/tile/tile_7_467951.mp3",
+    "sfx/synth/tick/tick_0.wav",
+    "sfx/synth/tick/tick_1.wav",
+    "sfx/synth/tick/tick_2.wav",
+    "sfx/synth/tick/tick_3.wav",
+    "sfx/synth/blip/blip_0.wav",
+    "sfx/synth/blip/blip_1.wav"
+  ],
+  "ambient": [
+    "sfx/genuine/ambient/amb_8_817225.mp3"
+  ],
+
+  "click": [
+    "sfx/synth/click/click_0.wav",
+    "sfx/synth/click/click_1.wav",
+    "sfx/synth/click/click_2.wav",
+    "sfx/synth/click/click_3.wav",
+    "sfx/synth/click/click_4.wav",
+    "sfx/synth/click/click_5.wav",
+    "sfx/synth/click/click_6.wav",
+    "sfx/synth/click/click_7.wav"
+  ],
+  "tick": [
+    "sfx/synth/tick/tick_0.wav",
+    "sfx/synth/tick/tick_1.wav",
+    "sfx/synth/tick/tick_2.wav",
+    "sfx/synth/tick/tick_3.wav",
+    "sfx/synth/tick/tick_4.wav",
+    "sfx/synth/tick/tick_5.wav",
+    "sfx/synth/tick/tick_6.wav",
+    "sfx/synth/tick/tick_7.wav"
+  ],
+  "key": [
+    "sfx/synth/key/key_0.wav",
+    "sfx/synth/key/key_1.wav",
+    "sfx/synth/key/key_2.wav",
+    "sfx/synth/key/key_3.wav",
+    "sfx/synth/key/key_4.wav",
+    "sfx/synth/key/key_5.wav",
+    "sfx/synth/key/key_6.wav",
+    "sfx/synth/key/key_7.wav"
+  ],
+  "blip": [
+    "sfx/synth/blip/blip_0.wav",
+    "sfx/synth/blip/blip_1.wav",
+    "sfx/synth/blip/blip_2.wav",
+    "sfx/synth/blip/blip_3.wav",
+    "sfx/synth/blip/blip_4.wav",
+    "sfx/synth/blip/blip_5.wav",
+    "sfx/synth/blip/blip_6.wav",
+    "sfx/synth/blip/blip_7.wav"
+  ],
+  "digital": [
+    "sfx/synth/digital/digital_0.wav",
+    "sfx/synth/digital/digital_1.wav",
+    "sfx/synth/digital/digital_2.wav",
+    "sfx/synth/digital/digital_3.wav",
+    "sfx/synth/digital/digital_4.wav",
+    "sfx/synth/digital/digital_5.wav",
+    "sfx/synth/digital/digital_6.wav",
+    "sfx/synth/digital/digital_7.wav"
+  ],
+  "swoosh_up": [
+    "sfx/synth/swoosh_up/swoosh_up_0.wav",
+    "sfx/synth/swoosh_up/swoosh_up_1.wav",
+    "sfx/synth/swoosh_up/swoosh_up_2.wav",
+    "sfx/synth/swoosh_up/swoosh_up_3.wav",
+    "sfx/synth/swoosh_up/swoosh_up_4.wav",
+    "sfx/synth/swoosh_up/swoosh_up_5.wav"
+  ],
+  "swoosh_down": [
+    "sfx/synth/swoosh_down/swoosh_down_0.wav",
+    "sfx/synth/swoosh_down/swoosh_down_1.wav",
+    "sfx/synth/swoosh_down/swoosh_down_2.wav",
+    "sfx/synth/swoosh_down/swoosh_down_3.wav",
+    "sfx/synth/swoosh_down/swoosh_down_4.wav",
+    "sfx/synth/swoosh_down/swoosh_down_5.wav"
+  ],
+  "transition_whoosh": [
+    "sfx/synth/transition_whoosh/transition_whoosh_0.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_1.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_2.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_3.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_4.wav",
+    "sfx/synth/transition_whoosh/transition_whoosh_5.wav"
+  ],
+  "thunk": [
+    "sfx/synth/thunk/thunk_0.wav",
+    "sfx/synth/thunk/thunk_1.wav",
+    "sfx/synth/thunk/thunk_2.wav",
+    "sfx/synth/thunk/thunk_3.wav",
+    "sfx/synth/thunk/thunk_4.wav",
+    "sfx/synth/thunk/thunk_5.wav",
+    "sfx/synth/thunk/thunk_6.wav",
+    "sfx/synth/thunk/thunk_7.wav"
+  ],
+  "glass": [
+    "sfx/synth/glass/glass_0.wav",
+    "sfx/synth/glass/glass_1.wav",
+    "sfx/synth/glass/glass_2.wav",
+    "sfx/synth/glass/glass_3.wav",
+    "sfx/synth/glass/glass_4.wav",
+    "sfx/synth/glass/glass_5.wav",
+    "sfx/synth/glass/glass_6.wav",
+    "sfx/synth/glass/glass_7.wav"
+  ],
+  "chime": [
+    "sfx/synth/chime/chime_0.wav",
+    "sfx/synth/chime/chime_1.wav",
+    "sfx/synth/chime/chime_2.wav",
+    "sfx/synth/chime/chime_3.wav",
+    "sfx/synth/chime/chime_4.wav",
+    "sfx/synth/chime/chime_5.wav",
+    "sfx/synth/chime/chime_6.wav",
+    "sfx/synth/chime/chime_7.wav"
+  ],
+  "ui_confirm": [
+    "sfx/synth/ui_confirm/ui_confirm_0.wav",
+    "sfx/synth/ui_confirm/ui_confirm_1.wav",
+    "sfx/synth/ui_confirm/ui_confirm_2.wav",
+    "sfx/synth/ui_confirm/ui_confirm_3.wav",
+    "sfx/synth/ui_confirm/ui_confirm_4.wav",
+    "sfx/synth/ui_confirm/ui_confirm_5.wav",
+    "sfx/synth/ui_confirm/ui_confirm_6.wav",
+    "sfx/synth/ui_confirm/ui_confirm_7.wav"
+  ],
+  "latch": [
+    "sfx/synth/latch/latch_0.wav",
+    "sfx/synth/latch/latch_1.wav",
+    "sfx/synth/latch/latch_2.wav",
+    "sfx/synth/latch/latch_3.wav",
+    "sfx/synth/latch/latch_4.wav",
+    "sfx/synth/latch/latch_5.wav",
+    "sfx/synth/latch/latch_6.wav",
+    "sfx/synth/latch/latch_7.wav"
+  ],
+  "camera_focus": [
+    "sfx/synth/camera_focus/camera_focus_0.wav",
+    "sfx/synth/camera_focus/camera_focus_1.wav",
+    "sfx/synth/camera_focus/camera_focus_2.wav",
+    "sfx/synth/camera_focus/camera_focus_3.wav",
+    "sfx/synth/camera_focus/camera_focus_4.wav",
+    "sfx/synth/camera_focus/camera_focus_5.wav"
+  ],
+  "riser_short": [
+    "sfx/synth/riser_short/riser_short_0.wav",
+    "sfx/synth/riser_short/riser_short_1.wav",
+    "sfx/synth/riser_short/riser_short_2.wav",
+    "sfx/synth/riser_short/riser_short_3.wav"
+  ],
+  "riser_long": [
+    "sfx/synth/riser_long/riser_long_0.wav",
+    "sfx/synth/riser_long/riser_long_1.wav",
+    "sfx/synth/riser_long/riser_long_2.wav",
+    "sfx/synth/riser_long/riser_long_3.wav"
+  ],
+  "sub_boom": [
+    "sfx/synth/sub_boom/sub_boom_0.wav",
+    "sfx/synth/sub_boom/sub_boom_1.wav",
+    "sfx/synth/sub_boom/sub_boom_2.wav",
+    "sfx/synth/sub_boom/sub_boom_3.wav",
+    "sfx/synth/sub_boom/sub_boom_4.wav",
+    "sfx/synth/sub_boom/sub_boom_5.wav"
+  ],
+  "noise_hit": [
+    "sfx/synth/noise_hit/noise_hit_0.wav",
+    "sfx/synth/noise_hit/noise_hit_1.wav",
+    "sfx/synth/noise_hit/noise_hit_2.wav",
+    "sfx/synth/noise_hit/noise_hit_3.wav",
+    "sfx/synth/noise_hit/noise_hit_4.wav",
+    "sfx/synth/noise_hit/noise_hit_5.wav",
+    "sfx/synth/noise_hit/noise_hit_6.wav",
+    "sfx/synth/noise_hit/noise_hit_7.wav"
+  ]
+}

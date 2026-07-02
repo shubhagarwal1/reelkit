@@ -30,14 +30,16 @@ loose; a bar-addressed script re-locked to a librosa grid reads like an edit.
 ## 2. The script system (one BRIEF, N SCRIPTs)
 
 Write one shared **BRIEF.md** (brand system, motion vocabulary, sound families, pacing standard)
-and one **SCRIPT.md per reel** that complies with it. A SCRIPT.md must contain — exhaustively:
+and one **SCRIPT.md per reel** that complies with it. Real, shipped examples:
+`templates/BRIEF.example.md` and `templates/SCRIPT.example.md` (a full 32s reel, bar-addressed). A SCRIPT.md must contain — exhaustively:
 concept · music direction (BPM + where the drop lands) · grade/color plan · scene-by-scene with
 time ranges **in bars+seconds**, exact px layouts (1080×1920), every entrance/hold/exit by
 vocabulary name, every sound cue with time+gain · climax spec frame-by-frame · endcard px spec ·
 copy deck · asset list · character. Bar-addressed times let you re-lock the whole script to any
 real grid later.
 
-**Motion vocabulary** (name the moves; scripts reference them):
+**Motion vocabulary** (name the moves; scripts reference them — working implementations of ALL of
+these live in `templates/kinetic.rig.html`, a real shipped reel kept as the base rig):
 `slideIn/slideOut` (words in from right / out to left, power4 — conveyor logic), `wavyIn/wavyOut`
 (word-by-word rise, back.out(1.5) — NEVER elastic on text), `popIn` (scale .42→1, back.out(2.4)),
 3D card entrances (rotateX/z + blur→sharp), `beatWave` (held text hops 12–17px on strong beats

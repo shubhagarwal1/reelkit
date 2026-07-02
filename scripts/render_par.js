@@ -12,15 +12,21 @@ const W=+wArg, H=+hArg, FPS=+fpsArg, SS=+ssArg;
 const GB = os.totalmem() / 2**30;
 const ramCap = Math.max(1, Math.floor((GB - 2) / 1.2));
 const WORKERS = +wkArg || Math.max(2, Math.min((os.cpus().length||4)-1, ramCap));
+const QUALITY = +(process.env.JPEG_Q || 92);   // 97 for final masters, 90 for drafts
 const OUT = path.resolve(outArg);
 const SRCFPS = FPS*SS;
 const fileURL = 'file://'+path.resolve(htmlArg);
 
 async function makePage(browser){
   const page = await browser.newPage({ viewport:{width:W,height:H}, deviceScaleFactor:1 });
-  await page.goto(fileURL, { waitUntil:'networkidle' });
-  await page.waitForFunction('window.__ready === true');
-  await page.evaluate(async () => { await document.fonts.ready;
+  // domcontentloaded, NOT networkidle — file:// pages with many local images can keep
+  // networkidle from ever firing; __ready is the real readiness signal (with a timeout
+  // so a broken page fails loudly instead of hanging the whole render).
+  await page.goto(fileURL, { waitUntil:'domcontentloaded' });
+  await page.waitForFunction('window.__ready === true', { timeout: 20000 });
+  // fonts.ready can stall on a bad @font-face — race it against a 5s cap.
+  await page.evaluate(async () => {
+    await Promise.race([document.fonts.ready, new Promise(r=>setTimeout(r,5000))]);
     await Promise.all(Array.from(document.images).map(i=>i.complete?0:i.decode().catch(()=>{}))); });
   return page;
 }
@@ -28,7 +34,7 @@ async function makePage(browser){
 (async () => {
   fs.rmSync(OUT, { recursive:true, force:true });
   fs.mkdirSync(OUT, { recursive:true });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage'] });
   const probe = await makePage(browser);
   const duration = await probe.evaluate('window.__duration');
   const total = Math.ceil(duration * SRCFPS);
@@ -46,8 +52,8 @@ async function makePage(browser){
       const t = i / SRCFPS;
       await page.evaluate((t)=>window.__seek(t), t);
       await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-      await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.jpg'), type:'jpeg', quality:92, clip:{x:0,y:0,width:W,height:H} });
-      if ((++done) % 120 === 0) console.log(`  ${done}/${total}`);
+      await page.screenshot({ path: path.join(OUT, String(i).padStart(5,'0')+'.jpg'), type:'jpeg', quality:QUALITY, clip:{x:0,y:0,width:W,height:H} });
+      if ((++done) % 120 === 0) { const fps=(done/((Date.now()-t0)/1000)).toFixed(1); console.log(`  ${done}/${total}  (${fps} fps)`); }
     }
     await page.close();
   }

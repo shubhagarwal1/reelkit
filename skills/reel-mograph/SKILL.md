@@ -52,8 +52,10 @@ films across sessions/machines (each film is independent — split via the `FILM
 node ${CLAUDE_PLUGIN_ROOT}/scripts/build_audio.js <film>/index.html <film>/audio.wav
 ```
 Reads `window.__audio` cues, resolves each `type` through `sfx/manifest.json`, applies per-hit
-pitch + pan so repeats never sound identical, over a subtle ambient bed. Requires a `sfx/`
-folder with `manifest.json` at the working root (ship your own CC0 SFX library).
+pitch + pan so repeats never sound identical, over a subtle ambient bed. For **beat-locked reels**
+pass `MUSIC_BED=<track>` — the track becomes the bed itself (prominent, cues sit on its beats,
+master loudnormed to −14 LUFS). No SFX library? `scripts/gen_sfx.sh` synthesizes a deterministic,
+license-clean kit with ffmpeg alone (`templates/sfx.manifest.example.json` shows the manifest shape).
 
 **5. Grade + mux** (one ffmpeg pass — see `templates/mograph.build.sh`):
 ```

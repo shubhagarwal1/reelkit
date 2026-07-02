@@ -117,15 +117,25 @@ function panFor(type, n){
     return idx;
   }
 
-  // input 0 = continuous ambient bed (looped/trimmed to duration, subtle, faded)
-  const ambFile = Array.isArray(manifest.ambient) ? manifest.ambient[0] : manifest.ambient;
+  // input 0 = the bed. Two modes:
+  //  - MUSIC_BED=<track>: music-FIRST reel — the track IS the bed (prominent, no loop; cues
+  //    were beat-locked to it), final master loudnormed to -14 LUFS. Use for beat-locked reels.
+  //  - default: continuous subtle ambient loop from the manifest (SFX-first films).
+  const MUSIC_BED = process.env.MUSIC_BED;
+  const ambFile = MUSIC_BED || (Array.isArray(manifest.ambient) ? manifest.ambient[0] : manifest.ambient);
   inputs.push(path.resolve(ambFile));
-  // loudnorm gives the bed a consistent, present level (so silence is truly filled),
-  // then AMB_VOL trims it to "subtle texture" rather than "song".
-  parts.push(`[0:a]aresample=48000,aloop=loop=-1:size=2e9,atrim=0:${duration},` +
-             `loudnorm=I=-20:TP=-3:LRA=7,` +
-             `afade=t=in:st=0:d=0.8,afade=t=out:st=${(duration-1.4).toFixed(2)}:d=1.4,` +
-             `volume=${AMB_VOL}[bed]`);
+  if (MUSIC_BED) {
+    // level the track, gentle in/out, sit a touch under the accents (master lifts to -14 LUFS)
+    parts.push(`[0:a]aresample=48000,atrim=0:${duration},loudnorm=I=-16:TP=-1.5:LRA=9,` +
+               `afade=t=in:st=0:d=0.05,afade=t=out:st=${(duration-0.6).toFixed(2)}:d=0.6,volume=0.95[bed]`);
+  } else {
+    // loudnorm gives the bed a consistent, present level (so silence is truly filled),
+    // then AMB_VOL trims it to "subtle texture" rather than "song".
+    parts.push(`[0:a]aresample=48000,aloop=loop=-1:size=2e9,atrim=0:${duration},` +
+               `loudnorm=I=-20:TP=-3:LRA=7,` +
+               `afade=t=in:st=0:d=0.8,afade=t=out:st=${(duration-1.4).toFixed(2)}:d=1.4,` +
+               `volume=${AMB_VOL}[bed]`);
+  }
   labels.push('[bed]');
 
   events.forEach((e, i) => {
@@ -174,9 +184,14 @@ function panFor(type, n){
     labels.push('[sting]');
   }
 
-  parts.push(`${labels.join('')}amix=inputs=${labels.length}:normalize=0:duration=longest,` +
-             `volume=0.92,alimiter=level=disabled:limit=0.97,apad,atrim=0:${duration},` +
-             `aformat=sample_fmts=s16:channel_layouts=stereo[out]`);
+  const master = MUSIC_BED
+    ? `amix=inputs=${labels.length}:normalize=0:duration=longest,volume=1.0,` +
+      `alimiter=level=disabled:limit=0.98,loudnorm=I=-14:TP=-1:LRA=11,` +
+      `apad,atrim=0:${duration},aformat=sample_fmts=s16:channel_layouts=stereo[out]`
+    : `amix=inputs=${labels.length}:normalize=0:duration=longest,` +
+      `volume=0.92,alimiter=level=disabled:limit=0.97,apad,atrim=0:${duration},` +
+      `aformat=sample_fmts=s16:channel_layouts=stereo[out]`;
+  parts.push(`${labels.join('')}${master}`);
 
   const args = [];
   inputs.forEach(f => { args.push('-i', f); });
