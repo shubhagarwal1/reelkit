@@ -9,8 +9,12 @@ any brand.
 |---|---|---|
 | **reel-liveaction** | Hype/promo reel from real footage, matched to a reference song | demucs + faster-whisper + librosa → editmap → rembg person-matte → ffmpeg compositing |
 | **reel-mograph** | Animated typography / feature / launch films (no footage) | GSAP timeline in HTML → headless-Chromium frame stepping → motion-blur supersample → ffmpeg + SFX |
+| **reel-scripting** | Bar-addressed production scripts + multi-reel campaigns | pick track → librosa beat grid → BRIEF + per-reel SCRIPT → parallel builder agents (preview-only) → serial renders |
+| **asset-casting** | License-safe hi-res photo sets, cast like a movie | Wikimedia Commons + Openverse harvest (keyless) → director-style curation → license manifest |
 
-Claude auto-picks **reel-liveaction** when the brief has footage, **reel-mograph** otherwise.
+Claude auto-picks **reel-liveaction** when the brief has footage, **reel-mograph** otherwise —
+and loads **reel-scripting** first for any 30s campaign reel (music-first beat locking is the
+single biggest quality lever we've measured).
 
 ---
 
@@ -32,6 +36,32 @@ footage, no manual editing.
 | cinematic + RSVP UI card | "just your face" photo-grid reveal | live metrics + charts |
 
 > Web-compressed previews (540×960, ~1 MB each). The pipeline outputs full 1080×1920.
+
+---
+
+## Campaign mode — several reels, one system (v0.2)
+
+Proven on a 4-reel product campaign (fest / photographer / corporate / marathon), all four written,
+built, and rendered in one session on an 8 GB Mac:
+
+1. **Music first.** `extract_beats.py` analyzes every candidate track (tempo + energy), cuts a bed
+   per reel at an energetic bar, and emits `beats.json` — the reel's ground-truth grid.
+2. **One BRIEF, N SCRIPTs.** A shared brand/motion/sound system + one exhaustive, *bar-addressed*
+   production script per reel (exact px layouts, every cue with time+gain, climax frame-by-frame).
+   Bar addressing means any script re-locks to any real track later.
+3. **Cast the assets.** `harvest_assets.py` pulls hi-res CC photos from Commons/Openverse (no API
+   keys); curation rejects public figures, third-party branding, and logo apparel; a license
+   manifest travels with every folder.
+4. **Parallel builders, serial renders.** One agent per reel, each in an isolated dir, verifying
+   itself only with `shot.js` contact sheets (`DONE errs=[]` + a director-style read of the
+   stills). Full renders run one at a time; final QA extracts frames from the **rendered mp4** —
+   the class of bug that killed us once (ghost text resurrected by overlapping tweens + stateful
+   render workers) is invisible in previews.
+
+The recurring craft rules that came out of this — hard-clearing exited text, `immediateRender:false`
+on mid-timeline `fromTo`s, seek-safe counters, ≥2s dead-still holds, 3-swoosh sound budgets,
+bar-loop-extending corrupt music beds — are all codified in [LESSONS.md](LESSONS.md) and the
+[reel-scripting](skills/reel-scripting/SKILL.md) skill, so no future session relearns them.
 
 ---
 
@@ -72,6 +102,8 @@ node   scripts/build_audio.js  film/index.html film/audio.wav                 # 
 skills/
   reel-liveaction/     SKILL.md — footage pipeline playbook Claude follows
   reel-mograph/        SKILL.md — motion-graphics playbook
+  reel-scripting/      SKILL.md — music-first beat-locked scripts + multi-agent campaign builds
+  asset-casting/       SKILL.md — keyless CC photo harvest + casting-director curation
   cinematography/      SKILL.md — lighting / angle / lens / mood vocabulary (shapes generation, selection, grade)
 scripts/
   analyze_ref.py       reference → recipe.json (tempo, beat grid, cut grid) + vocal/instrumental stems
@@ -81,7 +113,10 @@ scripts/
   build_audio.js       SFX track from a manifest, + optional music bed & endcard sting (MUSIC=/STING=)
   score_shots.py       rank clips/images by exposure + sharpness + face framing; keep the best takes
   captions.py          transcribe + burn sound-off captions inside the bottom safe area
-templates/             editmap schema + example, GSAP skeleton, build & batch scripts, brief, brandkit.json
+  shot.js              preview tool: screenshot a film at N timestamps + report page errors (the iterate-cheap loop)
+  extract_beats.py     tempo/beat grid + energetic-start bed cutting → beats.json (music-first workflow)
+  harvest_assets.py    Wikimedia Commons + Openverse harvester (≥1600px, biggest-first, license manifest)
+templates/             editmap schema + example, GSAP skeleton, build & batch scripts (incl. build_fast.sh env-knob build), brief, brandkit.json
 recipes/               saved reference analyses — reused, never re-measured
 LESSONS.md             append-only fixes — the plugin's memory (read before every run)
 ```

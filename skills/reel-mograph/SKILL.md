@@ -30,9 +30,12 @@ Animate with GSAP. Keep everything full-bleed (no dead margins). Drive lines/wor
 
 **2. Preview before rendering** (cheap sanity check):
 ```
-node ${CLAUDE_PLUGIN_ROOT}/scripts/render_mograph.js <film>/index.html <film>/frames 1080 1920 30 1
+node ${CLAUDE_PLUGIN_ROOT}/scripts/shot.js <film>/index.html /tmp/pv 1.8 4.8 7.5 ...
 ```
-Render a couple of frames or a low-ss pass and READ them. Fix layout/timing in the HTML.
+Screenshot 10–14 timestamps covering every scene + climax + endcard; it prints `DONE errs=[...]`
+which MUST be `[]`. Montage the stills into a contact sheet and READ it like a director: layout,
+readability (shoot t and t+1.8 for key lines — same settled frame = long-enough hold), no ghost
+text, endcard spacing. Iterate here — it's ~100× cheaper than a render.
 
 **3. Full render** at supersample 2 (true motion blur):
 ```
@@ -66,7 +69,9 @@ after each to free disk, recompress anything >60 MB, copy finals to the delivery
 
 ## Quality checklist — apply to EVERY film
 
-Load `skills/cinematography` for the look and `templates/brandkit.json` for the brand system. Then:
+Load `skills/cinematography` for the look and `templates/brandkit.json` for the brand system.
+For 30s campaign reels, load `skills/reel-scripting` FIRST (music-first beat grid, bar-addressed
+script, motion vocabulary, sound budget) and `skills/asset-casting` if real photos are needed. Then:
 - **Hook (first ~1.5s):** biggest word/number/image on frame 1 — no slow fade-in. Social videos win in the first second.
 - **Safe margins:** keep all text inside `brandkit.safe_area` (top 10% / bottom 18% / sides) — platform UI covers the edges.
 - **Sound-off captions:** most viewers are muted → burn captions with `scripts/captions.py` (sits in the bottom safe area).

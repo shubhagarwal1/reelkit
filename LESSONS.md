@@ -52,3 +52,60 @@ here. Both skills tell Claude to read this before starting. Newest at the bottom
 - macOS has no `timeout` command by default — don't wrap commands in it.
 - zsh does not word-split unquoted `$var` in `for` loops, and errors on empty globs; pass explicit
   values or guard globs.
+
+## GSAP timeline / ghost bleed
+- **Hard-clear every text container after its exit.** Overlapping in/out word tweens re-stamp
+  "exited" text (an in-tween ending after the out-tween resurrects it), and parallel render
+  workers reuse stateful pages that cache it. Child tweens can't override a parent's opacity, so
+  after each exit add `tl.set(container, {opacity:0}, afterExitTime)` — belt-and-braces on top of
+  `overwrite:"auto"` on exits.
+- **`fromTo` needs `immediateRender:false`.** A `fromTo` with visible from-vars paints at t=0 and
+  bleeds over every earlier scene (two independent builds hit this: a giant blurred headline and a
+  gray flash washing all pre-drop scenes). Any `fromTo`/`from` scheduled mid-timeline gets
+  `immediateRender:false`.
+- **`window.__seek` arrow must have braces:** `(t)=>{ tl.time(t) }`. The brace-less form returns
+  the timeline and can hang the renderer's evaluate.
+- **Counters must be seek-safe.** Drive rolling numbers from timeline progress (frame-stepped
+  `textContent` inside an onUpdate on a tween that the seek replays), never from wall-clock or
+  accumulators — parallel workers seek non-contiguous frames.
+- **Verify from the RENDERED mp4, not the preview.** `ffmpeg -ss T -i out.mp4 -frames:v 1` at
+  scene boundaries and holds. Static previews on a fresh page hide state bugs; and what looks like
+  a ghost in one frame may be a legitimate motion-blurred exit — check t±0.6s before "fixing" it.
+
+## Music & beats
+- **Music first, script in bars, re-lock to the real grid.** Scripts written at a nominal BPM
+  transfer cleanly to the real track if every time is bar-addressed; re-lock cuts/cues to librosa
+  beat times (downbeats = every 4th beat) and document the mapping in the file header.
+- **ffprobe duration on mp3s lies.** A bed source died decoding at 23.8s of a "60s" file
+  ("invalid new backstep"). Always ffprobe the CUT WAV; if short, bar-loop extend (append the
+  span between two late downbeats with a ~10ms crossfade) and re-extract beats — a clean loop
+  matched linear extrapolation within 7ms, so no cue re-lock was needed.
+- **Beat-hops need meaning and one voice.** Held-text hops land on strong beats with a `thunk`;
+  when two lines bounce over the same window, only ONE fires cues or every tap doubles.
+- **Elastic ease on text reads as wobble.** Use `back.out(1.5)` for word rises; save elastic for
+  props, if anything.
+
+## Readability & holds
+- **28–34s, ~2 bars/scene, every message ≥2s.** A 15s "dense" cut read as unwatchable; re-timing
+  the same content to 2 bars/scene fixed it without any redesign.
+- **Dead-still holds.** Perpetual float/drift during holds smears under tmix motion blur and reads
+  as "quality dropping". Motion belongs to entrances/exits/beat-hops only.
+- **Preview readability by shooting t AND t+1.8** for each key line — if the second still doesn't
+  show the same settled frame, the hold is too short.
+- **Don't force grayscale on hero photos** — it reads as degradation, not art direction. Full
+  color, `saturate(1.06)`, real spread.
+
+## Multi-agent production
+- **One reel = one agent = one directory.** Builders get script + brief + base rig + their own
+  music/beats/assets; they never touch sibling dirs.
+- **Builders preview, the parent renders.** Agents self-verify with shot.js contact sheets
+  (`DONE errs=[]` + a director-style read of the stills); full renders run serially in the parent
+  — and NOBODY `pkill`s Chromium while sibling agents run (it kills their browsers mid-preview).
+- **Downscale curated photos into the reel dir (~900px)** and preload them as hidden `<img>`;
+  hi-res originals multiply per-worker decode time for zero visible gain at 1080×1920.
+- **A killed batch resumes cheaply**: frames are per-reel, so wipe the partial `frames/` and
+  re-run only the unfinished reels.
+
+## Environment (more)
+- **zsh doesn't word-split `$var` in `for` loops** — a space-separated times string passed to
+  `ffmpeg -ss` arrives as one arg. Wrap batch loops in `bash -c` or use arrays.
